@@ -18,7 +18,7 @@ public class AirportService {
         this.flightRepository = flightRepository;
     }
 
-    public Object getFlightAndCargoCount(IATACode airport, OffsetDateTime departureDate){
+    public AirportFlightBaggageInfo getFlightAndCargoCount(IATACode airport, OffsetDateTime departureDate){
 
         var dayStart = departureDate.truncatedTo(ChronoUnit.DAYS);
         var nextDay = departureDate.truncatedTo(ChronoUnit.DAYS).plusDays(1);

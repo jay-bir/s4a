@@ -4,6 +4,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("C")
+@DiscriminatorValue("c")
 public class CargoTypeItems extends CargoSpaceItems {
 }

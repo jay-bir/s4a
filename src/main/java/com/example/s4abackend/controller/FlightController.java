@@ -24,11 +24,11 @@ public class FlightController {
     @RequestMapping("/{flightNumber}")
     public ResponseEntity<FlightCargoWeightInfo> getFlightCargoWeight(
             @PathVariable int flightNumber,
-            @RequestParam(required = false) Optional<OffsetDateTime> date,
-            @RequestParam(required = false) Optional<WeightUnit> unit){
+            @RequestParam(required = false) String date,
+            @RequestParam(required = false) WeightUnit unit){
 
-        var flightDate = date.orElse(OffsetDateTime.now());
-        var weightUnit = unit.orElse(WeightUnit.KILOGRAM);
+        var flightDate = date == null ? OffsetDateTime.now() : OffsetDateTime.parse(date);
+        var weightUnit = unit == null ? WeightUnit.KILOGRAM : unit;
         ResponseEntity<FlightCargoWeightInfo> response;
 
         FlightCargoWeightInfo info;
@@ -37,6 +37,7 @@ public class FlightController {
             response = new ResponseEntity<>(info, HttpStatus.OK);
         }
         catch (RuntimeException e) {
+            e.printStackTrace();
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return response;
